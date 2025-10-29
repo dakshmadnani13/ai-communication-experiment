@@ -1,0 +1,54 @@
+{
+  "name": "game-outcome-predictor",
+  "version": "1.0.0",
+  "description": "Football match outcome predictor with mathematical ensembling",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false src/index.ts",
+    "dev:fast": "tsx watch --clear-screen=false --ignore='**/*.test.ts' src/index.ts",
+    "build": "tsc --build --incremental --tsBuildInfoFile .tsbuildinfo",
+    "build:fast": "tsc --build --incremental",
+    "start": "node --max-old-space-size=2048 dist/index.js",
+    "start:prod": "node --max-old-space-size=2048 --optimize-for-size dist/index.js",
+    "test": "vitest --threads=8 --reporter=verbose",
+    "test:watch": "vitest --threads=8 --watch",
+    "test:coverage": "vitest --coverage --threads=8",
+    "lint": "eslint src --ext .ts --cache --cache-location .eslintcache",
+    "lint:fix": "eslint src --ext .ts --fix --cache --cache-location .eslintcache",
+    "type-check": "tsc --noEmit --incremental",
+    "type-check:watch": "tsc --noEmit --watch --incremental",
+    "clean": "rimraf dist .tsbuildinfo .eslintcache node_modules/.cache",
+    "prebuild": "npm run clean",
+    "start:all": "node simple-start.js"
+  },
+  "dependencies": {
+    "fastify": "^4.24.3",
+    "zod": "^3.22.4",
+    "undici": "^6.10.2",
+    "pino-pretty": "^10.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "rimraf": "^5.0.0",
+    "tsx": "^4.6.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@10.0.0",
+  "cpu": {
+    "maxThreads": 8,
+    "memoryLimit": "2048MB"
+  },
+  "optimization": {
+    "incremental": true,
+    "parallel": true,
+    "caching": true
+  }
+}
